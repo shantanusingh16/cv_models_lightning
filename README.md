@@ -40,7 +40,7 @@ cb_vision_models/
 
 1. Install the required dependencies:
    ```
-   pip install torch torchvision pytorch-lightning timm pyyaml onnx onnx-simplifier
+   pip install -r requirements.txt
    ```
 
 2. Update the `configs/default_config.yaml` file with your desired settings and data paths.
@@ -118,4 +118,4 @@ Contributions to improve and expand the project are welcome. Please submit pull 
 
 ## License
 
-[Add your chosen license here]
+Apache License Version 2.0
