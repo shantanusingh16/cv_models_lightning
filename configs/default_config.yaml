@@ -1,0 +1,35 @@
+# Data configuration
+data_dir: '/path/to/your/dataset'
+num_workers: 4
+batch_size: 32
+
+# Model configuration
+task: 'classification'  # Options: 'classification', 'detection', 'segmentation'
+backbone: 'mobilenetv2'  # Options: 'mobilenetv2', 'mobilenetv3'
+detection_head: 'ssd'  # Options: 'ssd', 'ssdlite' (only for detection task)
+segmentation_head: 'deeplabv3'  # Options: 'deeplabv3', 'deeplabv3plus' (only for segmentation task)
+num_classes: 10
+pretrained: true
+
+# Training configuration
+experiment_name: 'vision_model_experiment'
+max_epochs: 100
+gpus: 1
+learning_rate: 0.001
+
+# Loss configuration
+loss: 'cross_entropy'  # Options: 'cross_entropy', 'focal'
+
+# Augmentation configuration
+augmentations:
+  horizontal_flip: true
+  vertical_flip: false
+  random_crop:
+    enabled: true
+    size: [224, 224]
+  color_jitter:
+    enabled: true
+    brightness: 0.2
+    contrast: 0.2
+    saturation: 0.2
+    hue: 0.1
