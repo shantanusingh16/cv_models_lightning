@@ -1,0 +1,40 @@
+# Data configuration
+data_dir: '/path/to/your/dataset'
+num_workers: 4
+batch_size: 32
+
+# Model configuration
+task: 'detection' 
+backbone: 'mobilenetv2'  # Options: 'mobilenetv2', 'mobilenetv3'
+detection_head: 'ssdlite'  # Options: 'ssd', 'ssdlite' (only for detection task)
+num_classes: 1
+pretrained: true
+
+# Training configuration
+experiment_name: 'ssd_lite_experiment'
+max_epochs: 100
+gpus: 1
+learning_rate: 0.001
+
+# Loss configuration
+losses:
+  classification:
+    type: 'focal'  # Options: 'cross_entropy', 'focal'
+    weight: 1.0
+  localization:
+    type: 'smooth_l1'
+    weight: 1.0
+
+# Augmentation configuration
+augmentations:
+  horizontal_flip: true
+  vertical_flip: false
+  random_crop:
+    enabled: true
+    size: [224, 224]
+  color_jitter:
+    enabled: true
+    brightness: 0.2
+    contrast: 0.2
+    saturation: 0.2
+    hue: 0.1

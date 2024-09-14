@@ -38,14 +38,20 @@ cb_vision_models/
 
 ## Setup and Usage
 
-1. Install the required dependencies:
+1. Create a fresh conda environment with python 3.8:
    ```
+   conda create -n py38 python=3.8
+   ```
+
+2. Install the required dependencies in the created environment:
+   ```
+   conda activate py38
    pip install -r requirements.txt
    ```
 
-2. Update the `configs/default_config.yaml` file with your desired settings and data paths.
+3. Update the `configs/default_config.yaml` file with your desired settings and data paths.
 
-3. Prepare your dataset in the following structure:
+4. Prepare your dataset in the following structure:
    ```
    data_dir/
    ├── train/
@@ -62,21 +68,21 @@ cb_vision_models/
        └── ...
    ```
 
-4. Run the training script:
+5. Run the training script:
    ```
    python train.py --config configs/default_config.yaml
    ```
 
    This will start the training process using the specified configuration. The script will create checkpoints and log files in the `checkpoints/` and `logs/` directories, respectively.
 
-5. To evaluate the model, use the `evaluate.py` script:
+6. To evaluate the model, use the `evaluate.py` script:
    ```
    python evaluate.py --config configs/default_config.yaml --checkpoint path/to/checkpoint.ckpt
    ```
 
    This will load the model from the specified checkpoint and evaluate it on the test dataset.
 
-6. To export the model to ONNX format, use the `export_onnx.py` script:
+7. To export the model to ONNX format, use the `export_onnx.py` script:
    ```
    python export_onnx.py --config configs/default_config.yaml --checkpoint path/to/checkpoint.ckpt --output path/to/model.onnx
    ```
