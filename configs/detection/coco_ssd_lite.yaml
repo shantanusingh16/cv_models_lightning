@@ -1,5 +1,6 @@
 # Data configuration
-data_dir: '/path/to/your/detection-dataset'
+data_dir: './data_dir/coco2017'
+detection_dir: './data_dir/coco2017/detections'
 num_workers: 4
 batch_size: 32
 
@@ -11,18 +12,26 @@ num_classes: 1
 pretrained: true
 
 # Training configuration
-experiment_name: 'ssd_lite_experiment'
+experiment_name: 'coco_ssd_lite_experiment'
 max_epochs: 100
 learning_rate: 0.001
 
 # Loss configuration
 losses:
-  classification:
-    type: 'focal'  # Options: 'cross_entropy', 'focal'
-    weight: 1.0
-  localization:
-    type: 'smooth_l1'
-    weight: 1.0
+  detection:
+    classification:
+      - type: 'focal'
+        weight: 1.0
+        params:
+          gamma: 2.0
+          alpha: 0.25
+      - type: 'cross_entropy'
+        weight: 0.5
+    localization:
+      - type: 'smooth_l1'
+        weight: 1.0
+        params:
+          beta: 1.0
 
 # Augmentation configuration
 augmentations:

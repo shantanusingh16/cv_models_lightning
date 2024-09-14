@@ -20,7 +20,7 @@ class MobileNetV2(nn.Module):
         features = []
         for name, module in self.model.named_children():
             x = module(x)
-            if name in ['blocks', 'conv_stem', 'bn1']:
+            if name in ['blocks', 'conv_stem', 'bn1', 'conv_head']:
                 features.append(x)
         return x, features
 

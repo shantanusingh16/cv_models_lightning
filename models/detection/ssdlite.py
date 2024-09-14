@@ -31,7 +31,7 @@ class SSDLite(nn.Module):
 
         # Localization and confidence layers
         self.loc_layers = nn.ModuleList([
-            SeperableConv2d(512, 4 * 4, kernel_size=3, padding=1),
+            SeperableConv2d(320, 4 * 4, kernel_size=3, padding=1),
             SeperableConv2d(1280, 6 * 4, kernel_size=3, padding=1),
             SeperableConv2d(512, 6 * 4, kernel_size=3, padding=1),
             SeperableConv2d(256, 6 * 4, kernel_size=3, padding=1),
@@ -40,7 +40,7 @@ class SSDLite(nn.Module):
         ])
 
         self.conf_layers = nn.ModuleList([
-            SeperableConv2d(512, 4 * num_classes, kernel_size=3, padding=1),
+            SeperableConv2d(320, 4 * num_classes, kernel_size=3, padding=1),
             SeperableConv2d(1280, 6 * num_classes, kernel_size=3, padding=1),
             SeperableConv2d(512, 6 * num_classes, kernel_size=3, padding=1),
             SeperableConv2d(256, 6 * num_classes, kernel_size=3, padding=1),
@@ -57,7 +57,7 @@ class SSDLite(nn.Module):
         
         # Use relevant features from backbone
         x = features[-1]
-        detection_feed.append(features[-2])
+        detection_feed.extend(features[-2:])
         
         # Apply extra layers
         for layer in self.extras:

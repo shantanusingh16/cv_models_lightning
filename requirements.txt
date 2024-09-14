@@ -7,3 +7,4 @@ onnx==1.16.2
 onnxsim==0.4.36
 tensorboard>=2.5.0
 matplotlib==3.7.5
+pycocotools==2.0.7
