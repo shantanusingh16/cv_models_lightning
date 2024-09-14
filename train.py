@@ -4,9 +4,18 @@ import argparse
 import pytorch_lightning as pl
 from pytorch_lightning.callbacks import ModelCheckpoint, EarlyStopping
 from pytorch_lightning.loggers import TensorBoardLogger
+import torch
 
 from data import VisionDataModule
 from model import VisionModel
+
+def get_accelerator():
+    if torch.cuda.is_available():
+        return "cuda"
+    elif torch.backends.mps.is_available():
+        return "mps"
+    else:
+        return "cpu"
 
 def main(config_path):
     # Load configuration
@@ -37,10 +46,14 @@ def main(config_path):
     # Set up logger
     logger = TensorBoardLogger('logs', name=config['experiment_name'])
 
+    # Get the appropriate accelerator
+    accelerator = get_accelerator()
+
     # Create trainer
     trainer = pl.Trainer(
         max_epochs=config['max_epochs'],
-        gpus=config['gpus'],
+        accelerator=accelerator,
+        devices=1 if accelerator != "cpu" else None,
         callbacks=[checkpoint_callback, early_stop_callback],
         logger=logger,
         log_every_n_steps=50,

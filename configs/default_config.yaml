@@ -14,7 +14,6 @@ pretrained: true
 # Training configuration
 experiment_name: 'vision_model_experiment'
 max_epochs: 100
-gpus: 1
 learning_rate: 0.001
 
 # Loss configuration

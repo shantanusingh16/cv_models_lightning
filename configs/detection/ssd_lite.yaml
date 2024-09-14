@@ -1,5 +1,5 @@
 # Data configuration
-data_dir: '/path/to/your/dataset'
+data_dir: '/path/to/your/detection-dataset'
 num_workers: 4
 batch_size: 32
 
@@ -13,7 +13,6 @@ pretrained: true
 # Training configuration
 experiment_name: 'ssd_lite_experiment'
 max_epochs: 100
-gpus: 1
 learning_rate: 0.001
 
 # Loss configuration
