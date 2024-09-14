@@ -7,6 +7,16 @@ from pytorch_lightning.utilities.parsing import AttributeDict
 from data import VisionDataModule
 from model import VisionModel
 
+
+def get_accelerator():
+    if torch.cuda.is_available():
+        return "cuda"
+    elif torch.backends.mps.is_available():
+        return "mps"
+    else:
+        return "cpu"
+
+
 def main(config_path, checkpoint_path):
     # Load configuration
     with open(config_path, 'r') as config_file:
@@ -20,8 +30,14 @@ def main(config_path, checkpoint_path):
     model = VisionModel.load_from_checkpoint(checkpoint_path, config=config)
     model.eval()
 
+    # Get the appropriate accelerator
+    accelerator = get_accelerator()
+
     # Create trainer
-    trainer = pl.Trainer(gpus=config.gpus if torch.cuda.is_available() else None)
+    trainer = pl.Trainer(
+        accelerator=accelerator,
+        devices=1 if accelerator != "cpu" else None,
+    )
 
     # Evaluate the model
     results = trainer.test(model, datamodule=data_module)

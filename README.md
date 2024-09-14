@@ -46,7 +46,7 @@ cb_vision_models/
 2. Install the required dependencies in the created environment:
    ```
    conda activate py38
-   pip install -r requirements.txt
+   pip install -e .
    ```
 
 3. Update the `configs/default_config.yaml` file with your desired settings and data paths.

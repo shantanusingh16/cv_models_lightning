@@ -6,7 +6,6 @@ import os
 from PIL import Image
 import yaml
 import numpy as np
-import cv2
 
 class VisionDataset(Dataset):
     def __init__(self, root_dir, transform=None, task='classification', detection_dir=None, segmentation_dir=None, config_path=None):
@@ -83,7 +82,7 @@ class VisionDataset(Dataset):
 
     def _load_segmentation_mask(self, idx):
         if self.segmentation_paths[idx]:
-            mask = cv2.imread(self.segmentation_paths[idx], cv2.IMREAD_GRAYSCALE)
+            mask = np.array(Image.open(self.segmentation_paths[idx]).convert('L'))
             mask = (mask / self.scale).astype(np.int64)
             return torch.from_numpy(mask)
         return torch.tensor([])

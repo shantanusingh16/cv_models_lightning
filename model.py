@@ -2,7 +2,8 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 import pytorch_lightning as pl
-from torchmetrics import Accuracy, MeanAveragePrecision, JaccardIndex
+from torchmetrics import Accuracy, JaccardIndex
+from torchmetrics.detection import MeanAveragePrecision
 
 from models.backbones.mobilenetv2 import mobilenetv2
 from models.backbones.mobilenetv3 import mobilenetv3
